@@ -1,24 +1,14 @@
 ---
-
-- hosts: R6
-
-  gather_facts: false
-  connection: network_cli
-
-
+- name: cisco_sh_ver
+  hosts: all
+  gather_facts: true 
   tasks:
-
-   - name: read ip interfaces 
-     ios_command: 
-       commands: show ip interface brief
-     register: interface
-     
-   - debug: msg="{{ interface.stdout_lines }}"
-
-   - name: read config 
-     ios_command: 
-       commands: show running-config
-     register: config
-     
-   - debug: msg="{{ config.stdout_lines }}"
-
+  - name: run show version on remote devices
+    cisco.ios.ios_command:
+     commands:
+     - show version       
+  - name: show run on remote devices
+    become: true
+    cisco.ios.ios_command:
+     commands: 
+     - show run
