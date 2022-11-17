@@ -1,0 +1,11 @@
+---
+- name: configure top level configuration
+  cisco.ios.ios_config:
+    lines: hostname {{ inventory_hostname }}
+
+- name: configure interface settings
+  cisco.ios.ios_config:
+    lines:
+    - description test interface
+    - ip address 172.31.1.1 255.255.255.0
+    parents: interface gi0/2
