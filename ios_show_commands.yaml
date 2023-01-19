@@ -1,5 +1,5 @@
 ---
-- name: cisco_sh_ver
+
   hosts: cisco_routers
   gather_facts: true 
 
