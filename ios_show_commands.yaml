@@ -8,7 +8,6 @@
        commands:
        - show version       
     - name: show run on remote devices
-      become: true
       cisco.ios.ios_command:
        commands: 
        - show run
