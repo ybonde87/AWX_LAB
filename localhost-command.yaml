@@ -6,3 +6,11 @@
      setup:
        filter: "ansible_date_time"
        gather_subset: "!all"
+
+
+   - name: Store DTG as fact
+     set_fact:
+       DTG: "{{ ansible_date_time.date }}"
+
+
+   - debug: msg="{{ DTG.stdout }}"
