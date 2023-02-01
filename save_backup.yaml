@@ -1,11 +1,4 @@
 ---
-- hosts: R6
-
-  tasks:
-
-
-
-## Gather command output from the switch
        
 - hosts: R6
 
