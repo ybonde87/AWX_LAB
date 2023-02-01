@@ -7,14 +7,14 @@
       - show clock
     # - show users
     # - show platform
-      - show power inline
-      - show vlan
-      - show etherchannel summary
+    # - show power inline
+    # - show vlan
+    # - show etherchannel summary
       - show cdp neigh
-      - sh switch stack-ports
-      - show switch
+    # - sh switch stack-ports
+    # - show switch
     # - show switch stack-ports summary
-      - show env all
+    # - show env all
     # - show ip ospf int brief
     # - show ip ospf neigh
       - show cdp neighbors detail
@@ -24,9 +24,9 @@
       - show inventory raw
       - show boot
       - dir
-      - show int status | inc connected
-      - show int status
-      - show arp
+    # - show int status | inc connected
+    # - show int status
+    # - show arp
       - show ip interface brief
 
 ## Save the gathered config in a text file
