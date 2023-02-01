@@ -1,0 +1,50 @@
+---
+- hosts: R6
+
+  tasks:
+
+
+
+## Gather command output from the switch
+       
+- hosts: R6
+
+  vars:
+    command_list:
+      - show clock
+    # - show users
+    # - show platform
+      - show power inline
+      - show vlan
+      - show etherchannel summary
+      - show cdp neigh
+      - sh switch stack-ports
+      - show switch
+    # - show switch stack-ports summary
+      - show env all
+    # - show ip ospf int brief
+    # - show ip ospf neigh
+      - show cdp neighbors detail
+      - show version
+    # - show license usage
+    # - show license summary
+      - show inventory raw
+      - show boot
+      - dir
+      - show int status | inc connected
+      - show int status
+      - show arp
+      - show ip interface brief
+
+## Save the gathered config in a text file
+
+  tasks:
+   - name: Run the SHOW commands and save output 
+     ios_command:
+       commands: "{{ command_list }}"
+     register: showoutput
+
+   - name: "Put all the files together into one nice text file"
+     template: 
+       src: template.j2 
+       dest: "ftp://networkadmin:Network-dm1n@10.197.184.81//home_ftp/networkadmin/gso_network/{{hostvars.localhost.DTG}}/{{ inventory_hostname }}-{{hostvars.localhost.DTG}}-showoutput.txt"
