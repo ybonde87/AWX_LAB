@@ -18,8 +18,3 @@
       path: /home/networkadmin/{{hostvars.localhost.DTG}}
       state: directory
   run_once: true
-
-    - name: Set some data to pass down to the 2nd Job template
-      set_stats:
-        data:
-          DTG: "{{ ansible_facts.user_gecos }}-blah"
