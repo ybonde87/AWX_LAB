@@ -10,24 +10,18 @@
 
   tasks:
 
-   
+   - name: Create FTP Directory
+     uri:
+       url: "ftp://{{ FTP_SERVER }}/{{inventory_hostname}}-{{ansible_date_time.date}}"
+       method: mkdir
+       user: "{{ FTP_USER }}"
+       password: "{{ FTP_PASSWORD }}"
+       force_basic_auth: yes
+       status_code: [0, 257]
    - name: Upload Backup to FTP Server
-     hosts: localhost
-     gather_facts: yes
-     tasks:
-       - name: Create FTP Directory
-         uri:
-           url: "ftp://{{ FTP_SERVER }}/{{inventory_hostname}}-{{ansible_date_time.date}}"
-           method: mkdir
-           user: "{{ FTP_USER }}"
-           password: "{{ FTP_PASSWORD }}"
-           force_basic_auth: yes
-           status_code: [0, 257]
-   
-       - name: Upload Backup to FTP Server
-         copy:
-           content: "{{ hostvars['localhost'].backup_output | join('\n') }}"
-           dest: "ftp://{{ FTP_SERVER }}/{{inventory_hostname}}-{{ansible_date_time.date}}/{{inventory_hostname}}.txt"
-           remote_src: yes
-           mode: 0644
+     copy:
+       content: "{{ hostvars['localhost'].backup_output | join('\n') }}"
+       dest: "ftp://{{ FTP_SERVER }}/{{inventory_hostname}}-{{ansible_date_time.date}}/{{inventory_hostname}}.txt"
+       remote_src: yes
+       mode: 0644
    
