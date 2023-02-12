@@ -1,0 +1,21 @@
+---
+- name: Backup Configuration
+  hosts: all
+  gather_facts: yes
+  tasks:
+
+   
+   - name: Backup Configuration
+     hosts: switch
+     gather_facts: no
+     tasks:
+       - name: Backup Configuration to Local Machine
+         ios_command:
+           commands:
+             - show run
+         register: output
+   
+       - name: Save Backup to a Variable
+         set_fact:
+           backup_output: "{{ output.stdout_lines }}"
+   
