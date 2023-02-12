@@ -1,0 +1,30 @@
+
+
+- name: Install vsftpd
+  become: yes
+  package:
+    name: vsftpd
+    state: present
+
+- name: Create FTP user
+  become: yes
+  user:
+    name: ftpuser
+    password: ftpuser/ftpuser
+    shell: /bin/false
+    state: present
+
+- name: Configure vsftpd
+  become: yes
+  copy:
+    src: vsftpd.conf
+    dest: /etc/vsftpd.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start vsftpd
+  become: yes
+  service:
+    name: vsftpd
+    state: started
